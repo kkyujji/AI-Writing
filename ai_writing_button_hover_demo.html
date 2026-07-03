@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Writing 버튼 Hover 제안</title>
+  <style>
+    :root {
+      --blue: #2177f4;
+      --blue-deep: #0862df;
+      --mint: #52f2d7;
+      --mint-hover: #66ffe6;
+      --black: #101214;
+      --ease: cubic-bezier(.2, .82, .2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 78% 13%, rgba(82, 242, 215, .18), transparent 16%),
+        radial-gradient(circle at 12% 86%, rgba(82, 242, 215, .14), transparent 18%),
+        linear-gradient(155deg, var(--blue-deep), var(--blue) 54%, #4b98ff);
+    }
+
+    .demo {
+      width: min(100% - 32px, 760px);
+      display: grid;
+      justify-items: center;
+      gap: 26px;
+      padding: 64px 24px;
+    }
+
+    .label {
+      margin: 0;
+      color: rgba(255, 255, 255, .78);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .ai-writing-btn {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: inline-grid;
+      grid-template-columns: 86px minmax(260px, 1fr);
+      align-items: stretch;
+      width: min(100%, 520px);
+      min-height: 84px;
+      border: 0;
+      border-radius: 6px;
+      padding: 0;
+      color: #05090a;
+      background: var(--mint);
+      box-shadow:
+        0 14px 30px rgba(0, 0, 0, .12),
+        0 0 0 1px rgba(255, 255, 255, .18) inset;
+      text-decoration: none;
+      cursor: pointer;
+      transform: translateY(0);
+      transition:
+        transform .28s var(--ease),
+        background .28s ease,
+        box-shadow .28s var(--ease),
+        filter .28s ease;
+    }
+
+    .ai-writing-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, .55) 44%, transparent 58%);
+      opacity: .72;
+      transform: translateX(-140%);
+      transition: transform .62s var(--ease);
+      pointer-events: none;
+    }
+
+    .ai-writing-btn::after {
+      content: "";
+      position: absolute;
+      inset: -18px;
+      z-index: -1;
+      border-radius: 18px;
+      background: radial-gradient(circle, rgba(82, 242, 215, .55), transparent 64%);
+      opacity: 0;
+      transform: scale(.92);
+      transition:
+        opacity .28s ease,
+        transform .28s var(--ease);
+      pointer-events: none;
+    }
+
+    .arrow-box {
+      display: grid;
+      place-items: center;
+      background: var(--black);
+      color: rgba(255, 255, 255, .76);
+      transition:
+        background .28s ease,
+        color .28s ease;
+    }
+
+    .arrow-icon {
+      width: 42px;
+      height: 30px;
+      transform: translateX(0);
+      transition:
+        transform .28s var(--ease),
+        color .28s ease;
+    }
+
+    .button-text {
+      display: grid;
+      place-items: center;
+      padding: 0 34px;
+      font-size: clamp(26px, 4.4vw, 38px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1;
+      transition: transform .28s var(--ease);
+    }
+
+    .ai-writing-btn:hover {
+      background: var(--mint-hover);
+      box-shadow:
+        0 20px 38px rgba(0, 0, 0, .16),
+        0 0 34px rgba(82, 242, 215, .48),
+        0 0 0 1px rgba(255, 255, 255, .32) inset;
+      filter: saturate(1.04);
+      transform: translateY(-5px);
+    }
+
+    .ai-writing-btn:hover::before {
+      transform: translateX(140%);
+    }
+
+    .ai-writing-btn:hover::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .ai-writing-btn:hover .arrow-box {
+      background: #090b0d;
+      color: #ffffff;
+    }
+
+    .ai-writing-btn:hover .arrow-icon {
+      transform: translateX(10px);
+    }
+
+    .ai-writing-btn:hover .button-text {
+      transform: translateX(3px);
+    }
+
+    .ai-writing-btn:active {
+      transform: translateY(-2px);
+    }
+
+    .ai-writing-btn:focus-visible {
+      outline: 4px solid rgba(255, 255, 255, .4);
+      outline-offset: 6px;
+    }
+
+    @media (max-width: 560px) {
+      .ai-writing-btn {
+        grid-template-columns: 68px minmax(0, 1fr);
+        min-height: 68px;
+      }
+
+      .button-text {
+        padding: 0 20px;
+      }
+
+      .arrow-icon {
+        width: 34px;
+        height: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ai-writing-btn,
+      .ai-writing-btn::before,
+      .ai-writing-btn::after,
+      .arrow-box,
+      .arrow-icon,
+      .button-text {
+        transition-duration: .01ms;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="demo">
+    <p class="label">AI Writing CTA Hover 제안</p>
+
+    <a class="ai-writing-btn" href="#" aria-label="AI Writing 시작하기">
+      <span class="arrow-box" aria-hidden="true">
+        <svg class="arrow-icon" viewBox="0 0 54 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 18H47" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <path d="M32 4L48 18L32 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <span class="button-text">AI Writing 시작하기</span>
+    </a>
+  </main>
+</body>
+</html>
